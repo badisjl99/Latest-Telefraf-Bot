@@ -45,6 +45,20 @@ const actorSchema = new mongoose.Schema({
 const Movie = mongoose.model('Movie', movieSchema);
 
 
+bot.help(ctx => {
+    const helpMessage = `
+    Welcome to the Movie Bot!
+    
+    Available commands:
+    /start - Start the bot
+    /random_movie - Get a random movie recommendation
+    /help - Show this help message
+    `;
+    ctx.reply(helpMessage);
+});
+
+
+
 app.get('/randommovie', async (req, res) => {
     try {
       const randomMovie = await Movie.aggregate([
@@ -84,8 +98,16 @@ app.get('/randommovie', async (req, res) => {
 
 app.use(bot.webhookCallback('/bot')); 
 
-bot.start(ctx => ctx.reply('Welcome!'));
-bot.command('random', async (ctx) => {
+bot.start(ctx => {
+    const description = `🎬 Welcome to the Movie Bot! 🍿\n\n`;
+    const aboutBot = `Our bot has access to a collection of over 65,000 movies! 🌟\n\n`;
+    const usage = `To get started, simply use the /random_movie command to get a random movie recommendation. 🎥\n\n`;
+    const help = `You can also use the /help command to see all available commands and how to use them. ℹ️\n\n`;
+    const message = description + aboutBot + usage + help;
+
+    ctx.reply(message);
+});
+bot.command('random_movie', async (ctx) => {
     try {
         const response = await axios.get('http://localhost:6782/randommovie');
         const data = response.data;
