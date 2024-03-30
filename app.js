@@ -109,7 +109,7 @@ bot.start(ctx => {
 });
 bot.command('random_movie', async (ctx) => {
     try {
-        const response = await axios.get('http://localhost:6782/randommovie');
+        const response = await axios.get('https://latest-telefraf-bot.onrender.com/randommovie');
         const data = response.data;
 
         const { title, year,summary, rating, genres, download, imageUrl } = data;
