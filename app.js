@@ -3,7 +3,7 @@ require('dotenv').config();
 const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
-const { Telegraf } = require('telegraf');
+const { Telegraf, Markup } = require('telegraf');
 const axios = require('axios');
 const port = process.env.PORT || 6782;
 const app = express();
@@ -100,7 +100,7 @@ app.use(bot.webhookCallback('/bot'));
 
 bot.command('watch', async (ctx) => {
     try {
-        const url = 'https://stream-server-p1jp.onrender.com/'; // URL to redirect users to
+        const url = 'https://stream-server-p1jp.onrender.com/';
         const button = Markup.urlButton('Go to URL', url);
         
         ctx.reply('Click the button below to be redirected:', Markup.inlineKeyboard([button]));
