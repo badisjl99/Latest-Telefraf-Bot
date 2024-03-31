@@ -100,8 +100,8 @@ app.use(bot.webhookCallback('/bot'));
 
 bot.command('watch', async (ctx) => {
     try {
-        const url = 'https://stream-server-p1jp.onrender.com/';
-        const button = Markup.urlButton('Go to URL', url);
+        const url = 'https://stream-server-p1jp.onrender.com/'; // URL to redirect users to
+        const button = Markup.button.url('Go to URL', url); // Corrected method
         
         ctx.reply('Click the button below to be redirected:', Markup.inlineKeyboard([button]));
     } catch (error) {
