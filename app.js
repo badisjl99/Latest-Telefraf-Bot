@@ -98,6 +98,18 @@ app.get('/randommovie', async (req, res) => {
 
 app.use(bot.webhookCallback('/bot')); 
 
+bot.command('watch', async (ctx) => {
+    try {
+        const url = 'https://stream-server-p1jp.onrender.com/'; // URL to redirect users to
+        const button = Markup.urlButton('Go to URL', url);
+        
+        ctx.reply('Click the button below to be redirected:', Markup.inlineKeyboard([button]));
+    } catch (error) {
+        ctx.reply('An error occurred while processing your request.');
+        console.error(error);
+    }
+});
+
 bot.start(ctx => {
     const description = `🎬 Welcome to the Movie Bot! 🍿\n\n`;
     const aboutBot = `Our bot has access to a collection of over 65,000 movies! 🌟\n\n`;
